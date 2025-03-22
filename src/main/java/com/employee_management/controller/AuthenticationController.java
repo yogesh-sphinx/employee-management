@@ -31,10 +31,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
-        User registeredUser = authenticationService.signup(registerUserDto);
-
-        return ResponseEntity.ok(registeredUser);
+    public ResponseEntity<String> register(@RequestBody RegisterUserDto registerUserDto) {
+        authenticationService.signup(registerUserDto);
+        return ResponseEntity.ok("Account Created successfully");
     }
 
     @PostMapping("/login")
