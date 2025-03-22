@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.employee_management.entities.Employee;
 import com.employee_management.repository.EmployeeRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
@@ -24,6 +26,7 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
+    @Transactional
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
@@ -32,7 +35,6 @@ public class EmployeeService {
     public Optional<Employee> updateEmployee(Long id, Employee employeeDetails) {
         return employeeRepository.findById(id).map(employee -> {
             employee.setName(employeeDetails.getName());
-            employee.setEmail(employeeDetails.getEmail());
             employee.setDepartment(employeeDetails.getDepartment());
             employee.setSalary(employeeDetails.getSalary());
             employee.setUpdatedAt(java.time.LocalDateTime.now());
