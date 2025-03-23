@@ -26,6 +26,9 @@ public class EntityValidationAspect {
         }
 
         String serviceName = joinPoint.getTarget().getClass().getSimpleName();
+        if (serviceName.isEmpty()) {
+            throw new IllegalStateException("Invalid service class name: " + serviceName);
+        }
         String repositoryBeanName = Character.toLowerCase(serviceName.charAt(0)) + serviceName.substring(1).replace("Service", "Repository");
 
         JpaRepository<?, Long> repository = (JpaRepository<?, Long>) context.getBean(repositoryBeanName);

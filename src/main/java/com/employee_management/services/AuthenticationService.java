@@ -36,6 +36,7 @@ public class AuthenticationService {
                 if (registerUserDto.getEmail() == null || !registerUserDto.getEmail().matches(emailRegex)) {
                         throw new IllegalArgumentException("Invalid email format (e.g., example@gmail.com)");
                 }
+                
                 User user = new User();
                 user.setFullName(registerUserDto.getFullName());
                 user.setEmail(registerUserDto.getEmail());
